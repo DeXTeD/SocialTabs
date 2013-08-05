@@ -125,7 +125,7 @@ SocialTabs.prototype = {
 		case 'twitter':
 			return '<a class="twitter-timeline" href="#" data-widget-id="'+code+'"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
 		case 'google':
-			return '<div class="g-page" data-width="234" data-height="500" data-href="https://plus.google.com/'+code+'"></div><script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>';
+			return '<div class="g-page" data-width="234" data-height="500" data-href="'+code+'"></div><script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>';
 		default:
 			return code;
 		}
