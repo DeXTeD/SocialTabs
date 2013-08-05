@@ -1,3 +1,8 @@
+
+/*
+ * Social Tabs
+ */
+
 .socialTabs {
 	position: fixed;
 	top: 14%;
@@ -31,45 +36,55 @@
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		border: 10px solid;
-		background: #FFF no-repeat center center url(../images/social/loading.gif);
+		background: #FFF no-repeat center center url(../images/socialtabs/loading.gif);
 	}
-	.socialTabs-tab-content-inner {
-		position: relative;
-	}
-	.socialTabs-tab-content-inner div,
-	.socialTabs-tab-content-inner iframe {
-		background: #FFF;
-		vertical-align: middle;
-		/* google+ fix */
-		/*position: static !important;*/
-	}
+		.socialTabs-tab-content-inner {
+			position: relative;
+		}
+			.socialTabs-tab-content-inner div,
+			.socialTabs-tab-content-inner iframe {
+				background: #FFF;
+				vertical-align: middle;
+			}
+
+
+	/* Facebook */
 
 	.socialTabs-tab--facebook {
-		background-image: url(../images/social/f.png);
+		background-image: url(../images/socialtabs/f.png);
 	}
 		.socialTabs-tab--facebook .socialTabs-tab-content {
 			border-color: #345197;
 			min-height: 278px;
 		}
 
+
+	/* Twitter */
+
 	.socialTabs-tab--twitter {
-		background-image: url(../images/social/t.png);
+		background-image: url(../images/socialtabs/t.png);
 	}
 		.socialTabs-tab--twitter .socialTabs-tab-content {
 			border-color: #42BCE9;
 			height: 319px;
 		}
 
+
+	/* YouTube */
+
 	.socialTabs-tab--youtube {
-		background-image: url(../images/social/y.png);
+		background-image: url(../images/socialtabs/y.png);
 	}
 		.socialTabs-tab--youtube .socialTabs-tab-content {
 			border-color: #B31515;
 			min-height: 118px;
 		}
 
+
+	/* Google+ */
+
 	.socialTabs-tab--google {
-		background-image: url(../images/social/g.png);
+		background-image: url(../images/socialtabs/g.png);
 	}
 		.socialTabs-tab--google .socialTabs-tab-content {
 			border-color: #9E2318;
@@ -80,6 +95,7 @@
 			height: 343px;
 			overflow: hidden;
 		}
+		/* fix */
 		.socialTabs-tab-content-inner div,
 		.socialTabs-tab-content-inner iframe {
 			position: static !important;
