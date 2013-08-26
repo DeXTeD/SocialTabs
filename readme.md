@@ -27,11 +27,34 @@ new SocialTabs({
 });
 ```
 
+Można też dodawać własne zakładki wrzucając zamiast nazwy użytkownika lub adresu kod HTML:
+
+```js
+new SocialTabs({
+	example: '<a href="http://example.com"><img src="example.png" alt="Example.com"></a>'
+});
+```
+
+Następnie wystarczy dodać grafikę zakładki (możne przydać się dokument Photoshopa `PSD/photoshop.psd`) i analogicznie do pozostałych zakładek stworzyć klasy w CSS:
+
+```css
+.socialTabs-tab--example {
+	background-image: url(../images/socialtabs/example.png);
+}
+	.socialTabs-tab--example .socialTabs-tab-content {
+		border-color: #abc123;
+	}
+```
+
 ## License
 MIT License.
 
 
 ## Changelog
+
+### 1.1.0
+- Wsparcie dla AMD
+- Wyrzucony prymitywny switch
 
 ### 1.0.0
 - Initial release

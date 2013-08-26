@@ -1,13 +1,23 @@
 
 /*!
  * SocialTabs
- * Version 1.0.0
+ * Version 1.1.0
  * Full source at https://github.com/dexted/SocialTabs
  * Copyright (c) 2013 Kacper Kozak
  * MIT License
  */
 
-(function ($, window, document, undefined) {
+(function(root, factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['jquery'], function($) {
+			return factory($);
+		});
+	} else {
+		// Browser globals
+		root.SocialTabs = factory(root.jQuery || root.Zepto || root.$);
+	}
+}(this, function ($) {
 
 	function SocialTabs (services, config) {
 		this.services = [];
@@ -31,6 +41,21 @@
 			appendDelay: 500,
 			hideDelay: 100,
 			showDelay: 200
+		},
+
+		frames: {
+			facebook: function(href, options) {
+				return '<iframe src="http://www.facebook.com/plugins/likebox.php?href='+href+'&amp;width=234&amp;height=260&amp;colorscheme=light&amp;show_faces=true&amp;border_color=white&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="width:234px; height:260px; margin: -1px" allowTransparency="true"></iframe>';
+			},
+			youtube: function(user, options) {
+				return '<iframe src="http://www.youtube.com/subscribe_widget?gl=PL&amp;hl=pl&amp;p='+user+'" style="height: 100px; width: 234px; border: 0; margin:-1px;" scrolling="no" frameBorder="0"></iframe>';
+			},
+			twitter: function(id, options) {
+				return '<a class="twitter-timeline" href="#" data-widget-id="'+id+'"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+			},
+			google: function(href, options) {
+				return '<div class="g-page" data-width="234" data-height="500" data-href="'+href+'"></div><script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>';
+			}
 		},
 
 		/**
@@ -152,37 +177,19 @@
 		},
 
 		/**
-		 * Generuje kod widgetu na podstawie nazwy
-		 * @param  {string} name
-		 * @param  {string} code
-		 * @return {string}
-		 */
-		getReleaseFrame: function(name, code) {
-			switch(name) {
-			case 'facebook':
-				return '<iframe src="http://www.facebook.com/plugins/likebox.php?href='+code+'&amp;width=234&amp;height=260&amp;colorscheme=light&amp;show_faces=true&amp;border_color=white&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="width:234px; height:260px; margin: -1px;" allowTransparency="true"></iframe>';
-			case 'youtube':
-				return '<iframe src="http://www.youtube.com/subscribe_widget?gl=PL&amp;hl=pl&amp;p='+code+'" style="height: 100px; width: 234px; border: 0; margin:-1px;" scrolling="no" frameBorder="0"></iframe>';
-			case 'twitter':
-				return '<a class="twitter-timeline" href="#" data-widget-id="'+code+'"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
-			case 'google':
-				return '<div class="g-page" data-width="234" data-height="500" data-href="'+code+'"></div><script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>';
-			default:
-				return code;
-			}
-		},
-
-		/**
-		 * Wrapper dla getReleaseFrame()
-		 * Tworzy warstwę i wrzuca w nią wygenerowany kod
+		 * Generuje kod widgetu na podstawie nazwy oraz
+		 * tworzy warstwę i wrzuca w nią wygenerowany kod
 		 * @param  {string} name
 		 * @param  {string} code
 		 * @return {jQuery object}
 		 */
 		getReleaseCode: function(name, code) {
+			if (typeof this.frames[name] !== 'undefined') {
+				code = this.frames[name](code);
+			}
 			return $('<div/>', {
 					'class': this.getClass('tab-content-inner')
-				}).append(this.getReleaseFrame(name, code));
+				}).append(code);
 		},
 
 		/**
@@ -222,6 +229,6 @@
 		},
 	};
 
-	window.SocialTabs = SocialTabs;
+	return SocialTabs;
 
-})(jQuery, window, document);
+}));
