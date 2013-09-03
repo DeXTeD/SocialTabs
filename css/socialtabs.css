@@ -37,6 +37,7 @@
 		box-sizing: border-box;
 		border: 10px solid;
 		background: #FFF no-repeat center center url(../images/socialtabs/loading.gif);
+		background-clip: padding-box;
 	}
 		.socialTabs-tab-content-inner {
 			position: relative;
