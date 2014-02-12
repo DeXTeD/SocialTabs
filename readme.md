@@ -2,7 +2,7 @@
 
 Małe, ładne i lekkie zakładki ze serwisami społecznościowymi.
 
-Widgety serwisów są ładowane dopiero po aktywowaniu zakładki przez co nie opóźniają ładowania strony. Cały kod odpowiedzialny za wygląd znajduje się w pliku CSS przez co można łatwo i przyjemnie je zmieniać. Zakładki mogą być otwierane na dwa sposobny: kliknięcie lub wskazanie kursorem.
+Widgety serwisów są ładowane dopiero po aktywowaniu zakładki (lub od razu - można ustawić) przez co nie opóźniają ładowania strony. Cały kod odpowiedzialny za wygląd znajduje się w pliku CSS przez co można łatwo i przyjemnie je zmieniać. Animacja jest zrobiona za pomocą CSS3 `transition + transform: translate` więc jest płynna nawet na urządzeniach mobilnych. Zakładki mogą być otwierane na dwa sposobny: kliknięcie lub wskazanie kursorem.
 
 **[Demo](http://9px.pl/Projects/SocialTabs)**
 
@@ -22,6 +22,7 @@ new SocialTabs({
 }, {
 	action: 'hover', // hover lub click (domyślnie hover)
 	appendDelay: 500, // Opóźnienie wykonania zawartości, najlepiej równe czasowi animacji (domyślnie 500)
+					  // Można też wstawić `false` aby dodać widgety natychmiastowo (niezalecane)
 	hideDelay: 100, // Opóźnienie ukrycia (tylko dla hover, domyślnie 100)
 	showDelay: 200 // Opóźnienie wysunięcia (tylko dla hover, domyślnie 200)
 });

@@ -60,13 +60,36 @@
 
 		/**
 		 * Inicjuje SocialTabs dodając wszystkie strony
+		 * oraz sprawdza czy przeglądara obsługuje CSS3 Transform
 		 * @param  {object} services
 		 */
 		init: function(services) {
 			var self = this;
-			$.each(services, function(name, code) {
-				self.addService(name, code);
-			});
+			$.each(services, $.proxy(self.addService,this));
+
+			// Sprawdzamy czy mamy Transform
+			var support = false,
+				divStyle = document.createElement("div").style,
+				suffix = "Transform",
+				test = [
+					"O" + suffix,
+					"ms" + suffix,
+					"Webkit" + suffix,
+					"Moz" + suffix
+				],
+				i = test.length;
+
+			while( i-- ) {
+				if ( test[i] in divStyle ) {
+					support = true;
+					continue;
+				}
+			}
+
+			// Dodajemy klasę "socialTabs--noTransform" jak nie ma
+			if(!support) {
+				this.wrapper.addClass(this.getClass('-noTransform'));
+			}
 		},
 
 		/**
@@ -77,14 +100,20 @@
 		 */
 		addService: function(name, code) {
 			var service = {
-				name: name,
-				code: code,
-				release: this.getReleaseCode(name, code),
-				el: this.newTab(name)
-			};
+					name: name,
+					code: code,
+					release: this.getReleaseCode(name, code),
+					el: this.newTab(name)
+				};
 			this.services.push(service);
 			this.bind(service);
 			this.wrapper.append(service.el.tab);
+			if (this.config.appendDelay === false) {
+				setTimeout(function() {
+					service.el.content.append(service.release);
+					service.appended = true;
+				}, 1);
+			}
 			return service;
 		},
 
@@ -98,10 +127,9 @@
 			service._showTimer = setTimeout(function() {
 				service.el.tab.addClass(self.getOpenClass());
 				if (!service.appended) {
-					var content = service.release;
 					clearTimeout(service._appendTimer);
 					service._appendTimer = setTimeout(function() {
-						service.el.content.append(content);
+						service.el.content.append(service.release);
 						service.appended = true;
 					}, self.config.appendDelay);
 				}
@@ -209,6 +237,13 @@
 				tab: tab,
 				content: content
 			};
+		},
+
+		/**
+		 * Usuwa taby
+		 */
+		destroy: function() {
+			this.wrapper.remove();
 		},
 
 		/**
