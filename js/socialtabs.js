@@ -1,7 +1,7 @@
 
 /*!
  * SocialTabs
- * Version 1.1.0
+ * Version 1.2.0
  * Full source at https://github.com/dexted/SocialTabs
  * Copyright (c) 2013 Kacper Kozak
  * MIT License

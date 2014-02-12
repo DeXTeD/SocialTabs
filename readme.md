@@ -53,9 +53,13 @@ MIT License.
 
 ## Changelog
 
+### 1.2.0
+- Animacje CSS za pomocą `transform` + failback
+- Nowa opcja `false` dla `appendDelay`
+
 ### 1.1.0
 - Wsparcie dla AMD
-- Wyrzucony prymitywny switch
+- Wyrzucony switch
 
 ### 1.0.0
 - Initial release
