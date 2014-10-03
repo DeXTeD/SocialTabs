@@ -99,6 +99,7 @@
 		 * @return {object}
 		 */
 		addService: function(name, code) {
+			if(!code) return;
 			var service = {
 					name: name,
 					code: code,
